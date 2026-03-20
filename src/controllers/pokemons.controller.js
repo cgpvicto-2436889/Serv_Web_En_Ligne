@@ -29,21 +29,3 @@ const getPokemons = async (req, res) => {
 export {
   getPokemons
 }
-
-const getSalutationsPourLangue = async (req, res) => {
-
-  try {
-    // Appel à la fonction getSalutations dans le modèle
-    const salutation = await pokemonModel.getLangueSalutation(req);
-
-    return res.json(salutation);
-  } 
-  catch (erreur) {
-    console.log(`Erreur, code: ${erreur.code} sqlState ${erreur.sqlState} : 
-    ${erreur.sqlMessage}`);
-    throw erreur;
-  }
-}  
-export {
-    getSalutationsPourLangue
-}
