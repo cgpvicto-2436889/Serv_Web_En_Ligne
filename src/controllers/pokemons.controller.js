@@ -3,29 +3,28 @@ import pokemonModel from "../models/pokemons.model.js";
 const getPokemons = async (req, res) => {
   const id = req.params.id;
 
-  if (!req.params.id) {
-    res.status(400)
-    res.send({
+  if (!id) {
+    return res.status(400).json({
       message: "L'id du pokemon n'est pas valide"
-    })
-    return;
+    });
   }
 
   try {
     const pokemon = await pokemonModel.getPokemonSelonId(id);
 
     if (pokemon.length === 0) {
-      return res.status(404).json({ error: `Aucun pokemon pour: ${id}`});
+      return res.status(404).json({ error: `Aucun pokemon pour: ${id}` });
     }
 
     return res.status(200).json(pokemon[0]);
+  } catch (erreur) {
+    console.log(`Erreur PostgreSQL: ${erreur.message}`);
+    return res.status(500).json({
+      error: "Erreur interne du serveur"
+    });
   }
-  catch (erreur) {
-    console.log(`Erreur, code: ${erreur.code} sqlState ${erreur.sqlState} : 
-    ${erreur.sqlMessage}`);
-    throw erreur;
-  }
-}
+};
+
 export {
   getPokemons
-}
+};
