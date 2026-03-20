@@ -16,7 +16,7 @@ const getPokemonSelonId = async (id) => {
 
     } catch (erreur) {
         console.log(`Erreur PostgreSQL :
-                    ${erreur.message}`);
+                    ${erreur.message}` + erreur);
         throw erreur;
     }
 };

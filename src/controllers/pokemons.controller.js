@@ -20,7 +20,7 @@ const getPokemons = async (req, res) => {
   } catch (erreur) {
     console.log(`Erreur PostgreSQL: ${erreur.message}`);
     return res.status(500).json({
-      error: "Erreur interne du serveur"
+      error: "Erreur interne du serveur   " + erreur
     });
   }
 };
