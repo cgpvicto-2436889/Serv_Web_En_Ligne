@@ -10,7 +10,7 @@ const getPokemons = async (req, res) => {
       return res.status(404).json({ error: `Aucun pokemons` });
     }
 
-    return res.status(200).json(pokemon[0]);
+    return res.status(200).json(pokemon);
   } catch (erreur) {
     console.log(`Erreur PostgreSQL: ${erreur.message}`);
     return res.status(500).json({
