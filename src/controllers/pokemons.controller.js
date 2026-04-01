@@ -3,17 +3,11 @@ import pokemonModel from "../models/pokemons.model.js";
 const getPokemons = async (req, res) => {
   const id = req.params.id;
 
-  if (!id) {
-    return res.status(400).json({
-      message: "L'id du pokemon n'est pas valide"
-    });
-  }
-
   try {
-    const pokemon = await pokemonModel.getPokemonSelonId(id);
+    const pokemon = await pokemonModel.getPokemonSelonId();
 
     if (pokemon.length === 0) {
-      return res.status(404).json({ error: `Aucun pokemon pour: ${id}` });
+      return res.status(404).json({ error: `Aucun pokemons` });
     }
 
     return res.status(200).json(pokemon[0]);
